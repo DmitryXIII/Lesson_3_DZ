@@ -125,8 +125,8 @@ public class Lesson_3 {
         System.out.println("\u001B[42m\u001B[30m++++++++++++\u001B[0m");
         String[] words = {"яблоко", "апельсин", "лимон", "банан", "абрикос",
                 "авокадо", "брокколи", "морковь", "вишня", "чеснок",
-                "виноград", "дыня", "leak", "киви", "манго",
-                "гриб", "орех", "олива", "горох", "арахис",
+                "виноград", "дыня", "персик", "киви", "манго",
+                "гриб", "орех", "слива", "горох", "арахис",
                 "груша", "перец", "ананас", "тыква", "картофель"};
         while (true) {
             boolean isWin = false; // признак завершения игры (если слово угадано)
@@ -138,17 +138,7 @@ public class Lesson_3 {
                 userTries++;
                 System.out.print("Попробуй угадать (введи здесь свой вариант): ");
                 String userWord = reader.readLine();
-                if (userTries % 3 == 0) { // после каждой 3-й неудачной попытки угадать компьютер дает подсказку
-                    promtForUser++;
-                    System.out.print("\u001B[44m\u001B[30m" + promtForUser + "\u001B[44m\u001B[30m-я подсказка: \u001B[0m");
-                    for (int i = 0; i < promtForUser; i++) { // с каждой следующей подсказкой открываем на одну букву больше
-                        System.out.print("\u001B[44m\u001B[30m" + compWord.charAt(i) + "\u001B[0m");
-                    }
-                    for (int i = 0; i < (15 - promtForUser); i++) { // заполняем строку символами '#' (до 15 символов)
-                        System.out.print("\u001B[44m\u001B[30m#\u001B[0m");
-                    }
-                    System.out.println();
-                }
+
                 if (userWord.equals(compWord)) { // если слово угадано, игра завершается
                     System.out.println("=======");
                     System.out.println("Угадал!");
@@ -167,6 +157,18 @@ public class Lesson_3 {
                     }
                     for (int i = 0; i < (15 - equalsCharsCount); i++) { // после одинаковых букв строка заполняется символом '#' (до 15 символов)
                         System.out.print("#");
+                    }
+                    System.out.println();
+                }
+
+                if (userTries % 3 == 0 && isWin != true) { // после каждой 3-й неудачной попытки угадать компьютер дает подсказку
+                    promtForUser++;
+                    System.out.print("\u001B[44m\u001B[30m" + promtForUser + "\u001B[44m\u001B[30m-я подсказка: \u001B[0m");
+                    for (int i = 0; i < promtForUser; i++) { // с каждой следующей подсказкой открываем на одну букву больше
+                        System.out.print("\u001B[44m\u001B[30m" + compWord.charAt(i) + "\u001B[0m");
+                    }
+                    for (int i = 0; i < (15 - promtForUser); i++) { // заполняем строку символами '#' (до 15 символов)
+                        System.out.print("\u001B[44m\u001B[30m#\u001B[0m");
                     }
                     System.out.println();
                 }
