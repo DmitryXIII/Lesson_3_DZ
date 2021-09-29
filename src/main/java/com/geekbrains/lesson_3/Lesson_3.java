@@ -14,14 +14,14 @@ public class Lesson_3 {
     static String COLOR_RESET = "\u001B[0m";
 
     public static void main(String[] args) throws Exception {
-        chooseGame(); // игровое меню
+        gameMenu(); // игровое меню
     }
 
     /**
      * Игровое меню
      * @throws Exception - ловим некорректный воод с клавиатуры
      */
-    public static void chooseGame() throws Exception {
+    public static void gameMenu() {
         System.out.println(BG_BLACK + "+++ МЕНЮ +++" + COLOR_RESET);
         System.out.println("1 - \"Угадай число\"");
         System.out.println("2 - \"Угадай слово\"");
@@ -56,7 +56,7 @@ public class Lesson_3 {
      * Пользователь за 3 попытки должен угадать загаданное число
      * @throws Exception - ловим некорректный воод с клавиатуры
      */
-    public static void gameCatchRandomNumber() throws Exception {
+    public static void gameCatchRandomNumber() {
         System.out.println(BG_GREEN + TEXT_BLACK + "++++++++++++" + COLOR_RESET);
         System.out.println(BG_GREEN + TEXT_BLACK + "УГАДАЙ ЧИСЛО" + COLOR_RESET);
         System.out.println(BG_GREEN + TEXT_BLACK + "++++++++++++" + COLOR_RESET);
@@ -98,21 +98,8 @@ public class Lesson_3 {
                     System.out.println("Твое число больше загаданного компьютером");
                 }
             }
-            System.out.print("Попробовать еще раз? (ДА - 1, НЕТ - 0): ");
-            int isWantRepeat = -1;
-            while (isWantRepeat < 0 || isWantRepeat > 1) { // ввод значения, пока не введен 0 или 1
-                try {
-                    isWantRepeat = Integer.parseInt(reader.readLine()); // выбор еще одной попытки или завершения игры
-                    if (isWantRepeat < 0 || isWantRepeat > 1)
-                        System.out.print("Неправильный формат ввода. Введи 1 (ДА) или 0 (НЕТ): ");
-                } catch (Exception e) {
-                    System.out.print("Неправильный формат ввода. Введи 1 (ДА) или 0 (НЕТ): ");
-                }
-            }
-            if (isWantRepeat == 0) { // если введен 0, то игра завершается
-                System.out.println(BG_WHITE + TEXT_BLACK + "== КОНЕЦ ИГРЫ ==" + COLOR_RESET);
+            if (repeatGame() == 0)
                 break;
-            }
         }
     }
 
@@ -177,22 +164,28 @@ public class Lesson_3 {
                     System.out.println();
                 }
             }
-            System.out.print("Попробовать еще раз? (ДА - 1, НЕТ - 0): ");
-            int isWantRepeat = -1;
-            while (isWantRepeat < 0 || isWantRepeat > 1) { // ввод значения, пока не введен 0 или 1
-                try {
-                    isWantRepeat = Integer.parseInt(reader.readLine()); // выбор еще одной попытки или завершения игры
-                    if (isWantRepeat < 0 || isWantRepeat > 1)
-                        System.out.print("Неправильный формат ввода. Введи 1 (ДА) или 0 (НЕТ): ");
-                } catch (Exception e) {
-                    System.out.print("Неправильный формат ввода. Введи 1 (ДА) или 0 (НЕТ): ");
-                }
-            }
-            if (isWantRepeat == 0) { // если введен 0, то игра завершается
-                System.out.println(BG_WHITE + TEXT_BLACK + "== КОНЕЦ ИГРЫ ==" + COLOR_RESET);
+            if (repeatGame() == 0)
                 break;
+        }
+    }
+
+    public static int repeatGame () {
+        System.out.print("Попробовать еще раз? (ДА - 1, НЕТ - 0): ");
+        int isWantRepeat = -1;
+        while (isWantRepeat < 0 || isWantRepeat > 1) { // ввод значения, пока не введен 0 или 1
+            try {
+                isWantRepeat = Integer.parseInt(reader.readLine()); // выбор еще одной попытки или завершения игры
+                if (isWantRepeat < 0 || isWantRepeat > 1)
+                    System.out.print("Неправильный формат ввода. Введи 1 (ДА) или 0 (НЕТ): ");
+            } catch (Exception e) {
+                System.out.print("Неправильный формат ввода. Введи 1 (ДА) или 0 (НЕТ): ");
             }
         }
+        if (isWantRepeat == 0) { // если введен 0, то игра завершается
+            System.out.println(BG_WHITE + TEXT_BLACK + "== КОНЕЦ ИГРЫ ==" + COLOR_RESET);
+            return 0;
+        }
+        return isWantRepeat;
     }
 }
 
