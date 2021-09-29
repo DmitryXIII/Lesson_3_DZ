@@ -135,7 +135,8 @@ public class Lesson_3 {
                     System.out.println("Угадал!");
                     System.out.println("=======");
                     isWin = true;
-                } else if ((userTries % 3 != 0)) { // если слово не угадано и не пора выдавать подсказку, компьютер показывает, есть ли в начале слов одинаковые буквы
+                } else if ((userTries % 3 != 0) || ((userTries % 3 == 0) && promtForUser == compWord.length())) { // если слово не угадано и не пора выдавать подсказку, компьютер показывает, есть ли в начале слов одинаковые буквы
+                    // если в подсказке высвечено все слово целиком, то подсказки больше не даются
                     int minNumberOfChars = (compWord.length() < userWord.length() ? compWord.length() : userWord.length()); // определение, какое слово короче, чтобы в цикле количество итераций не вышло за пределы длины самого короткого слова
                     int equalsCharsCount = 0; //
                     for (int i = 0; i < minNumberOfChars; i++) { // пока есть одинаковые буквы, они выводятся в консоль
@@ -152,8 +153,8 @@ public class Lesson_3 {
                     System.out.println();
                 }
 
-                if (userTries % 3 == 0 && isWin != true) { // после каждой 3-й неудачной попытки угадать компьютер дает подсказку
-                    promtForUser++;
+                if (userTries % 3 == 0 && promtForUser < compWord.length() && isWin != true) { // после каждой 3-й неудачной попытки угадать компьютер дает подсказку
+                    promtForUser++; //подсказки даются до тех пор, пока в подсказке не показано все слово
                     System.out.print(BG_BLUE + TEXT_BLACK + promtForUser + "-я подсказка: " + COLOR_RESET);
                     for (int i = 0; i < promtForUser; i++) { // с каждой следующей подсказкой открываем на одну букву больше
                         System.out.print(BG_BLUE + TEXT_BLACK + compWord.charAt(i) + COLOR_RESET);
@@ -183,7 +184,6 @@ public class Lesson_3 {
         }
         if (isWantRepeat == 0) { // если введен 0, то игра завершается
             System.out.println(BG_WHITE + TEXT_BLACK + "== КОНЕЦ ИГРЫ ==" + COLOR_RESET);
-            return 0;
         }
         return isWantRepeat;
     }
