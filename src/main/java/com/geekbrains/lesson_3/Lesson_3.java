@@ -5,6 +5,13 @@ import java.io.InputStreamReader;
 
 public class Lesson_3 {
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    static String BG_BLACK = "\u001B[40m";
+    static String BG_GREEN = "\u001B[42m";
+    static String BG_YELLOW = "\u001B[43m";
+    static String BG_BLUE = "\u001B[44m";
+    static String BG_WHITE = "\u001B[47m";
+    static String TEXT_BLACK = "\u001B[30m";
+    static String COLOR_RESET = "\u001B[0m";
 
     public static void main(String[] args) throws Exception {
         chooseGame(); // игровое меню
@@ -12,11 +19,10 @@ public class Lesson_3 {
 
     /**
      * Игровое меню
-     *
      * @throws Exception - ловим некорректный воод с клавиатуры
      */
     public static void chooseGame() throws Exception {
-        System.out.println("\u001B[40m +++ МЕНЮ +++ \u001B[0m");
+        System.out.println(BG_BLACK + "+++ МЕНЮ +++" + COLOR_RESET);
         System.out.println("1 - \"Угадай число\"");
         System.out.println("2 - \"Угадай слово\"");
         System.out.println("3 - ВЫХОД");
@@ -33,7 +39,7 @@ public class Lesson_3 {
                         gameCatchRandomWord(); // вырать игру "Угадай слово"
                         break;
                     case (3):
-                        System.out.println("\u001B[47m\u001B[30m== ВЫХОД ==\u001B[0m"); // Завершить программу
+                        System.out.println(BG_WHITE + TEXT_BLACK + "== ВЫХОД ==" + COLOR_RESET); // Завершить программу
                         break;
                     default:
                         throw new Exception(); // если в меню сделан некорректный выбор - просим сделать выбор заново
@@ -48,18 +54,17 @@ public class Lesson_3 {
      * Игра "Угадай число"
      * Компьютер загадывает число от 0 до 9
      * Пользователь за 3 попытки должен угадать загаданное число
-     *
      * @throws Exception - ловим некорректный воод с клавиатуры
      */
     public static void gameCatchRandomNumber() throws Exception {
-        System.out.println("\u001B[42m\u001B[30m++++++++++++\u001B[0m");
-        System.out.println("\u001B[42m\u001B[30mУГАДАЙ ЧИСЛО\u001B[0m");
-        System.out.println("\u001B[42m\u001B[30m++++++++++++\u001B[0m");
+        System.out.println(BG_GREEN + TEXT_BLACK + "++++++++++++" + COLOR_RESET);
+        System.out.println(BG_GREEN + TEXT_BLACK + "УГАДАЙ ЧИСЛО" + COLOR_RESET);
+        System.out.println(BG_GREEN + TEXT_BLACK + "++++++++++++" + COLOR_RESET);
         while (true) {
             boolean isWin = false; // признак победы пользователя (пользователь угадал загаданное число не более чем за 3 попытки)
             int counter = 0; // счетчик попыток угадать число
             int compNumber = (int) (Math.random() * 10); // компьютер загадывает число
-            System.out.println("\u001B[43m\u001B[30m== Компьютер загадал число от 0 до 9 ==\u001B[0m");
+            System.out.println(BG_YELLOW + TEXT_BLACK + "== Компьютер загадал число от 0 до 9 ==" + COLOR_RESET);
             System.out.println("У тебя есть три попытки, чтобы угадать это число!");
             while (!isWin) {
                 int userNumber = -1; // переменная для хода пользователя
@@ -105,7 +110,7 @@ public class Lesson_3 {
                 }
             }
             if (isWantRepeat == 0) { // если введен 0, то игра завершается
-                System.out.println("\u001B[47m\u001B[30m== КОНЕЦ ИГРЫ ==\u001B[0m");
+                System.out.println(BG_WHITE + TEXT_BLACK + "== КОНЕЦ ИГРЫ ==" + COLOR_RESET);
                 break;
             }
         }
@@ -116,13 +121,12 @@ public class Lesson_3 {
      * Компьтер загадывает слово, пользователь пытается отгадать
      * Через каждые 3 неудачные попытки угадать слово компьютер дает подсказку
      * Игра продолжается, пока пользователь не угадает слово
-     *
      * @throws Exception - ловим некорректный воод с клавиатуры
      */
     public static void gameCatchRandomWord() throws Exception {
-        System.out.println("\u001B[42m\u001B[30m++++++++++++\u001B[0m");
-        System.out.println("\u001B[42m\u001B[30mУГАДАЙ СЛОВО\u001B[0m");
-        System.out.println("\u001B[42m\u001B[30m++++++++++++\u001B[0m");
+        System.out.println(BG_GREEN + TEXT_BLACK + "++++++++++++" + COLOR_RESET);
+        System.out.println(BG_GREEN + TEXT_BLACK + "УГАДАЙ СЛОВО" + COLOR_RESET);
+        System.out.println(BG_GREEN + TEXT_BLACK + "++++++++++++" + COLOR_RESET);
         String[] words = {"яблоко", "апельсин", "лимон", "банан", "абрикос",
                 "авокадо", "брокколи", "морковь", "вишня", "чеснок",
                 "виноград", "дыня", "персик", "киви", "манго",
@@ -133,7 +137,7 @@ public class Lesson_3 {
             int userTries = 0; // счетчик попыток угадать слово
             int promtForUser = 0; // счетчик количества подсказок
             String compWord = words[(int) (Math.random() * 26)]; // компьютер загадывает слово
-            System.out.println("\u001B[43m\u001B[30m== Компьютер загадал слово (это что-то съедобное) ==\u001B[0m");
+            System.out.println(BG_YELLOW + TEXT_BLACK + "== Компьютер загадал слово (это что-то съедобное) ==" + COLOR_RESET);
             while (!isWin) {
                 userTries++;
                 System.out.print("Попробуй угадать (введи здесь свой вариант): ");
@@ -163,12 +167,12 @@ public class Lesson_3 {
 
                 if (userTries % 3 == 0 && isWin != true) { // после каждой 3-й неудачной попытки угадать компьютер дает подсказку
                     promtForUser++;
-                    System.out.print("\u001B[44m\u001B[30m" + promtForUser + "\u001B[44m\u001B[30m-я подсказка: \u001B[0m");
+                    System.out.print(BG_BLUE + TEXT_BLACK + promtForUser + "-я подсказка: " + COLOR_RESET);
                     for (int i = 0; i < promtForUser; i++) { // с каждой следующей подсказкой открываем на одну букву больше
-                        System.out.print("\u001B[44m\u001B[30m" + compWord.charAt(i) + "\u001B[0m");
+                        System.out.print(BG_BLUE + TEXT_BLACK + compWord.charAt(i) + COLOR_RESET);
                     }
                     for (int i = 0; i < (15 - promtForUser); i++) { // заполняем строку символами '#' (до 15 символов)
-                        System.out.print("\u001B[44m\u001B[30m#\u001B[0m");
+                        System.out.print(BG_BLUE + TEXT_BLACK + "#" + COLOR_RESET);
                     }
                     System.out.println();
                 }
@@ -185,7 +189,7 @@ public class Lesson_3 {
                 }
             }
             if (isWantRepeat == 0) { // если введен 0, то игра завершается
-                System.out.println("\u001B[47m\u001B[30m== КОНЕЦ ИГРЫ ==\u001B[0m");
+                System.out.println(BG_WHITE + TEXT_BLACK + "== КОНЕЦ ИГРЫ ==" + COLOR_RESET);
                 break;
             }
         }
